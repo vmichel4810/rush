@@ -5104,9 +5104,13 @@ function wp_widgets_add_menu() {
 function wp_ob_end_flush_all() {
 	$levels = ob_get_level();
 	for ( $i = 0; $i < $levels; $i++ ) {
-		ob_end_flush();
+		// code originel faisant beuguer
+		// ob_end_flush();
+		// repair the code no eroor now
+		remove_action( 'shutdown', 'wp_ob_end_flush_all', 1);
 	}
 }
+
 
 /**
  * Load custom DB error or display WordPress DB error.
